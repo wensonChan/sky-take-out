@@ -76,6 +76,19 @@ public class DishController {
     }
 
     /**
+     * 根据菜品类别id查询菜品
+     *
+     * @return
+     */
+    @GetMapping("/list")
+    @ApiOperation("根据菜品类别id查询菜品")
+    public Result<List<DishVO>> getByListId(@RequestParam Long categoryId) {
+        log.info("根据菜品类别id查询菜品:{}", categoryId);
+        List<DishVO> list = dishService.getByListId(categoryId);
+        return Result.success(list);
+    }
+
+    /**
      * 修改菜品
      * @param dishDTO
      * @return
@@ -85,6 +98,20 @@ public class DishController {
     public Result update(@RequestBody DishDTO dishDTO){
         log.info("修改菜品:{}",dishDTO);
         dishService.updateWithFlavor(dishDTO);
+        return Result.success();
+    }
+
+    /**
+     * 启用禁用菜品
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用禁用菜品")
+    public Result startOrStop(@PathVariable Integer status, long id) {
+        log.info("启用禁用菜品:{},{}", status, id);
+        dishService.startOrStop(status, id);
         return Result.success();
     }
 }

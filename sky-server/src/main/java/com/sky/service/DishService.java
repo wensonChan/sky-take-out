@@ -33,6 +33,7 @@ public interface DishService {
 
     /**
      * 根据id查询菜品
+     *
      * @param id
      * @return
      */
@@ -40,7 +41,19 @@ public interface DishService {
 
     /**
      * 根据id修改菜品
+     *
      * @param dishDTO
      */
     void updateWithFlavor(DishDTO dishDTO);
+
+    List<DishVO> getByListId(Long categoryId);
+
+    /**
+     * 启用禁用菜品
+     *
+     * @param status
+     * @param id
+     * @return
+     */
+    void startOrStop(Integer status, long id);
 }
